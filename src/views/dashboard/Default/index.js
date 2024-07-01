@@ -24,10 +24,10 @@ const Dashboard = () => {
     setLoading(false);
   }, []);
 
-  const [contactData, setContactData] = useState([]);
-  const [taskData, setTaskData] = useState([]);
-  const [leadData, setLeadData] = useState([]);
-  const [propertyData, setPropertyData] = useState([]);
+  // const [contactData, setContactData] = useState([]);
+  // const [taskData, setTaskData] = useState([]);
+  // const [leadData, setLeadData] = useState([]);
+  // const [propertyData, setPropertyData] = useState([]);
   const [dashboardCardData, setDashboardCardData] = useState({
     inboundCalls: [],
     inboundLeads: [],
@@ -111,42 +111,42 @@ const Dashboard = () => {
     }
   };
 
-  const fetchContactsData = async () => {
-    try {
-      const response = await getApi(user.role === 'admin' ? 'api/contact/viewallcontacts' : `api/contact/viewusercontacts/${user._id}`);
-      user.role === 'admin' ? setContactData(response.data.contactDetails) : setContactData(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchContactsData = async () => {
+  //   try {
+  //     const response = await getApi(user.role === 'admin' ? 'api/contact/viewallcontacts' : `api/contact/viewusercontacts/${user._id}`);
+  //     user.role === 'admin' ? setContactData(response.data.contactDetails) : setContactData(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const fetchLeadData = async () => {
-    try {
-      const response = await getApi(user.role === 'admin' ? 'api/lead/viewallleads' : `api/lead/viewuserleads/${user._id}`);
-      console.log(response);
-      setLeadData(response?.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchLeadData = async () => {
+  //   try {
+  //     const response = await getApi(user.role === 'admin' ? 'api/lead/viewallleads' : `api/lead/viewuserleads/${user._id}`);
+  //     console.log(response);
+  //     setLeadData(response?.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const fetchPropertyData = async () => {
-    try {
-      const response = await getApi(user.role === 'admin' ? `api/property/viewallproperties` : `api/property/viewuserproperty/${user._id}`);
-      setPropertyData(response?.data?.properties);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchPropertyData = async () => {
+  //   try {
+  //     const response = await getApi(user.role === 'admin' ? `api/property/viewallproperties` : `api/property/viewuserproperty/${user._id}`);
+  //     setPropertyData(response?.data?.properties);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const fetchTaskData = async () => {
-    try {
-      const response = await getApi(user.role === 'admin' ? 'api/task/viewalltasks' : `api/task/viewusertasks/${user._id}`);
-      setTaskData(response?.data?.taskData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchTaskData = async () => {
+  //   try {
+  //     const response = await getApi(user.role === 'admin' ? 'api/task/viewalltasks' : `api/task/viewusertasks/${user._id}`);
+  //     setTaskData(response?.data?.taskData);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   // const fetchMeetingData = async () => {
   //   try {
   //     const response = await getApi(user.role === 'admin' ? 'api/meeting/viewallmeetings' : `api/meeting/viewusermeetings/${user._id}`);
@@ -174,10 +174,10 @@ const Dashboard = () => {
   useEffect(() => {
     fetchInbondData();
     fetchOutbondData();
-    fetchContactsData();
-    fetchLeadData();
-    fetchPropertyData();
-    fetchTaskData();
+    // fetchContactsData();
+    // fetchLeadData();
+    // fetchPropertyData();
+    // fetchTaskData();
     // fetchMeetingData();
     // fetchCallData();
     // fetchEmailData();
