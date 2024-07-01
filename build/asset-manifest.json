@@ -1,9 +1,10 @@
 {
   "files": {
     "main.css": "/static/css/main.1e7ee70b.css",
-    "main.js": "/static/js/main.23e3e7c7.js",
-    "static/js/717.47f54f57.chunk.js": "/static/js/717.47f54f57.chunk.js",
+    "main.js": "/static/js/main.3c5408aa.js",
+    "static/js/281.364bfc57.chunk.js": "/static/js/281.364bfc57.chunk.js",
     "static/js/78.6f8d7d07.chunk.js": "/static/js/78.6f8d7d07.chunk.js",
+    "static/js/304.e1185c12.chunk.js": "/static/js/304.e1185c12.chunk.js",
     "static/js/383.53596c4c.chunk.js": "/static/js/383.53596c4c.chunk.js",
     "static/js/934.ed782ce2.chunk.js": "/static/js/934.ed782ce2.chunk.js",
     "static/js/286.dab880ff.chunk.js": "/static/js/286.dab880ff.chunk.js",
@@ -13,20 +14,20 @@
     "static/js/707.5ce1b224.chunk.js": "/static/js/707.5ce1b224.chunk.js",
     "static/js/92.05badb3d.chunk.js": "/static/js/92.05badb3d.chunk.js",
     "static/js/83.636fa6f3.chunk.js": "/static/js/83.636fa6f3.chunk.js",
-    "static/js/144.6da76273.chunk.js": "/static/js/144.6da76273.chunk.js",
+    "static/js/144.b7159495.chunk.js": "/static/js/144.b7159495.chunk.js",
     "static/js/845.4ac70a77.chunk.js": "/static/js/845.4ac70a77.chunk.js",
     "static/js/832.d1e8d1a4.chunk.js": "/static/js/832.d1e8d1a4.chunk.js",
-    "static/css/864.247f9394.chunk.css": "/static/css/864.247f9394.chunk.css",
-    "static/js/864.3ab2699a.chunk.js": "/static/js/864.3ab2699a.chunk.js",
-    "static/media/user-round.svg": "/static/media/user-round.13b5a31bebd2cc6016d6db2cac8e92d1.svg",
+    "static/css/217.247f9394.chunk.css": "/static/css/217.247f9394.chunk.css",
+    "static/js/217.00a7e547.chunk.js": "/static/js/217.00a7e547.chunk.js",
+    "static/media/user-round.svg": "/static/media/user-round.27fe79b102ea6aad2f60e66cff82818d.svg",
     "static/media/mastercard.png": "/static/media/mastercard.35468db92c555b9677a4.png",
     "static/media/visa.png": "/static/media/visa.21879bff221bfdce5dde.png",
     "static/media/americanexpress.png": "/static/media/americanexpress.085cd795eb6d3257a877.png",
     "index.html": "/index.html",
-    "static/media/social-google.svg": "/static/media/social-google.9887eb8eb43729cb99f402cfa0de3c44.svg"
+    "static/media/social-google.svg": "/static/media/social-google.a57081bd95c2519caad91216a8dba3ad.svg"
   },
   "entrypoints": [
     "static/css/main.1e7ee70b.css",
-    "static/js/main.23e3e7c7.js"
+    "static/js/main.3c5408aa.js"
   ]
 }
