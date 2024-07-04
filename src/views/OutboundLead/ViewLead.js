@@ -84,7 +84,7 @@ const ViewLead = (props) => {
               </Typography>
             </Grid>
             <Grid item xs={8}>
-              <Typography variant="p">{data?.other_requirements[0]}</Typography>
+              <Typography variant="p">{data?.other_requirements}</Typography>
             </Grid>
           </Grid>
 
