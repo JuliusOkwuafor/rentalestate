@@ -210,15 +210,15 @@ function DetailsOutbound() {
 
                 <Box display={'flex'} flexDirection={'column'} gap={1} py={2}>
                   <Typography variant="h5">Transcript:</Typography>
-                  {/* {callData.transcript &&
+                  {callData.transcript &&
                     callData?.transcript.map((item, index) => {
                       return (
                         <Typography key={index} style={{ color: 'black' }}>
                           {item.speaker} : {item.message}
                         </Typography>
                       );
-                    })} */}
-                  {callData?.transcript}
+                    })}
+                  {/* {callData?.transcript} */}
                 </Box>
                 <Box display={'flex'} flexDirection={'column'} gap={1} py={2}>
                   <Typography variant="h5">Call Summary :</Typography>
