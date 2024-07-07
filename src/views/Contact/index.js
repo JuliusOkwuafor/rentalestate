@@ -2,10 +2,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from 'react';
 // @mui
-import CallIcon from '@mui/icons-material/Call';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, Button, Card, Container, Stack, Typography } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router';
@@ -27,6 +23,7 @@ import CallDialog from './Components/contactActivityDialog/CallDialog';
 import SendMailDialog from './Components/contactActivityDialog/sendMailDialog';
 import DeleteContact from './DeleteContact';
 import EditContact from './Edit';
+import ViewContact from './ViewContact';
 
 //-------------------------------------------------------------------------------------------------
 const StyledMenu = styled((props) => (
@@ -71,6 +68,8 @@ const Contact = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
   const [openAdd, setOpenAdd] = useState(false);
+  const [openView, setOpenView] = useState(false);
+  const [viewData, setViewData] = useState(null);
   const [openEdit, setOpenEdit] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const [openDelete, setOpenDelete] = useState(false);
@@ -170,7 +169,15 @@ const Contact = () => {
       field: 'name',
       headerName: 'Name',
       flex: 1,
-      cellClassName: 'name-column--cell--capitalize'
+      cellClassName: 'name-column--cell name-column--cell--capitalize',
+      renderCell: (params) => {
+        const handleFirstNameClick = () => {
+          setViewData(params?.row);
+          setOpenView(true);
+        };
+
+        return <Box onClick={handleFirstNameClick}>{params?.value ? params?.value : 'No Name'}</Box>;
+      }
     },
     {
       field: 'phoneNumber',
@@ -247,8 +254,10 @@ const Contact = () => {
 
   const handleOpenAdd = () => setOpenAdd(true);
   const handleCloseAdd = () => setOpenAdd(false);
+
   return (
     <>
+      <ViewContact open={openView} data={viewData} handleClose={() => setOpenView(false)} />
       <AddContact open={openAdd} handleClose={handleCloseAdd} />
       <DeleteContact open={openDelete} handleClose={handleCloseDeleteLead} id={deleteId} />
       <EditContact open={openEdit} handleClose={handleCloseEditlead} data={data} />
@@ -275,7 +284,7 @@ const Contact = () => {
                 checkboxSelection
                 getRowId={(row) => row?._id}
                 slots={{ toolbar: GridToolbar }}
-                slotProps={{ toolbar: { showQuickFilter: true } }}
+                slotProps={{ toolbar: { showQuickFilter: true, printOptions: { disableToolbarButton: true } } }}
               />
             </Card>
           </Box>

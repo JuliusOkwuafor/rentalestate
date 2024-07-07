@@ -5,6 +5,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { getApi } from 'views/services/api';
 import TableStyle from '../../ui-component/TableStyle';
+import ViewCall from './ViewCall';
 // ----------------------------------------------------------------------
 
 //-------------------------------------------------------------------------------------------------
@@ -12,6 +13,8 @@ import TableStyle from '../../ui-component/TableStyle';
 const NoAnswer = () => {
   // const navigate = useNavigate();
   // const user = JSON.parse(localStorage.getItem('user'));
+  const [openView, setOpenView] = useState(false);
+  const [viewData, setViewData] = useState(null);
 
   //-------------------------------------------
   // ----------------------------------------------------------------------
@@ -81,7 +84,12 @@ const NoAnswer = () => {
       flex: 1,
       cellClassName: 'name-column--cell name-column--cell--capitalize',
       renderCell: (params) => {
-        return <Typography>{params?.value ? <a href={`tel:${params?.value}`}>{params?.value}</a> : 'N/A'}</Typography>;
+        const handleFirstNameClick = () => {
+          setViewData(params?.row);
+          setOpenView(true);
+        };
+
+        return <Box onClick={handleFirstNameClick}>{params?.value ? params?.value : 'No Name'}</Box>;
       }
     },
     {
@@ -112,6 +120,7 @@ const NoAnswer = () => {
 
   return (
     <>
+      <ViewCall open={openView} data={viewData} handleClose={() => setOpenView(false)} />
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent={'space-between'}>
           <Typography variant="h4">No-Answer</Typography>
@@ -136,7 +145,7 @@ const NoAnswer = () => {
                     }}
                     slots={{ toolbar: GridToolbar }}
                     pageSizeOptions={[5, 20]}
-                    slotProps={{ toolbar: { showQuickFilter: true } }}
+                    slotProps={{ toolbar: { showQuickFilter: true, printOptions: { disableToolbarButton: true } } }}
                   />
                 </>
               )}
