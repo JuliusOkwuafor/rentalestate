@@ -24,6 +24,8 @@ import TaskDashboard from 'views/Task/Components/TaskDashboard';
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 const LeadManagement = Loadable(lazy(() => import('views/Lead')));
 const OutboundLeadManagement = Loadable(lazy(() => import('views/OutboundLead')));
+const NoAnswer = Loadable(lazy(() => import('views/NoAnswer')));
+// const ContactManagement = Loadable(lazy(() => import('views/ContactManagement')));
 const ContactManagement = Loadable(lazy(() => import('views/Contact')));
 const Call = Loadable(lazy(() => import('views/Call')));
 const Policy = Loadable(lazy(() => import('views/Policy')));
@@ -71,6 +73,15 @@ const MainRoutes = {
         {
           path: 'outbound-lead',
           element: <OutboundLeadManagement />
+        }
+      ]
+    },
+    {
+      path: 'dashboard',
+      children: [
+        {
+          path: 'no-answer',
+          element: <NoAnswer />
         }
       ]
     },

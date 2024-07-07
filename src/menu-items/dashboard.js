@@ -12,7 +12,8 @@ import {
   IconPhoneCheck,
   IconPhoneIncoming,
   IconPhoneOutgoing,
-  IconUsers
+  IconUsers,
+  IconPhoneX
 } from '@tabler/icons';
 
 // constant
@@ -29,7 +30,8 @@ const icons = {
   IconPhoneCheck,
   IconUsers,
   IconPhoneIncoming,
-  IconPhoneOutgoing
+  IconPhoneOutgoing,
+  IconPhoneX
 };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
@@ -157,6 +159,14 @@ const dashboard = {
       type: 'item',
       url: '/dashboard/outbound-lead',
       icon: icons.IconAntennaBars5,
+      breadcrumbs: false
+    },
+    {
+      id: '15',
+      title: 'No Answer',
+      type: 'item',
+      url: '/dashboard/no-answer',
+      icon: icons.IconPhoneX,
       breadcrumbs: false
     }
   ]
