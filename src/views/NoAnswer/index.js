@@ -131,7 +131,7 @@ const NoAnswer = () => {
               {badLeadData && (
                 <>
                   <Typography variant="h4" sx={{ margin: '2px 15px' }}>
-                    Leads ( {badLeadData?.length} )
+                    Bad Leads ( {badLeadData?.length} )
                   </Typography>
                   <DataGrid
                     rows={newData}
