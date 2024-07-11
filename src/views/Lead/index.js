@@ -190,7 +190,7 @@ const Lead = () => {
     <>
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent={'space-between'}>
-          <Typography variant="h4">Lead-Management</Typography>
+          <Typography variant="h4">Inbound-Lead-Management</Typography>
         </Stack>
         <TableStyle>
           <Box width="100%">

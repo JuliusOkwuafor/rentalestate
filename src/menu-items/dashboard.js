@@ -112,7 +112,7 @@ const dashboard = {
           id: '03-01',
           title: 'Inbound Bad Leads',
           type: 'item',
-          url: '/dashboard/no-answer',
+          url: '/dashboard/contact',
           icon: icons.IconPhoneIncoming,
           breadcrumbs: false
         },
@@ -120,18 +120,18 @@ const dashboard = {
           id: '03-02',
           title: 'Outbound Bad Leads',
           type: 'item',
-          url: '/dashboard/no-answer',
+          url: '/dashboard/contact',
           icon: icons.IconPhoneOutgoing,
           breadcrumbs: false
         }
       ]
     },
     {
-      id: '02',
-      title: 'Contact Management',
+      id: '04-',
+      title: 'No Answer',
       type: 'item',
-      url: '/dashboard/contact',
-      icon: icons.IconPhoneCheck,
+      url: '/dashboard/no-answer',
+      icon: icons.IconPhoneX,
       breadcrumbs: false
     },
     {
