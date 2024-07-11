@@ -148,14 +148,14 @@ const Lead = () => {
       field: 'name',
       headerName: 'Name',
       flex: 1,
-      cellClassName: 'name-column--cell name-column--cell--capitalize',
-      renderCell: (params) => {
-        const handleFirstNameClick = () => {
-          navigate(`/dashboard/lead/view/${params?.row._id ? params?.row._id : params?.row.call_id}`);
-        };
+      cellClassName: 'name-column--cell name-column--cell--capitalize'
+      // renderCell: (params) => {
+      //   const handleFirstNameClick = () => {
+      //     navigate(`/dashboard/lead/view/${params?.row._id ? params?.row._id : params?.row.call_id}`);
+      //   };
 
-        return <Box onClick={handleFirstNameClick}>{params?.value ? params?.value : 'No Name'}</Box>;
-      }
+      //   return <Box onClick={handleFirstNameClick}>{params?.value ? params?.value : 'No Name'}</Box>;
+      // }
     },
     {
       field: 'email',

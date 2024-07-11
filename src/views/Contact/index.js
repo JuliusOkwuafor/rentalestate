@@ -2,10 +2,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from 'react';
 // @mui
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Button, Card, Container, Stack, Typography } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router';
-import { getApi } from 'views/services/api';
+import { deleteApi, getApi } from 'views/services/api';
 import TableStyle from '../../ui-component/TableStyle';
 import Iconify from '../../ui-component/iconify';
 import AddContact from './AddContact';
@@ -188,68 +189,28 @@ const Contact = () => {
       field: 'email',
       headerName: 'Email Address',
       flex: 1
-    }
+    },
     // {
     //   field: 'preferredContactMethod',
     //   headerName: 'Contact Method',
     //   flex: 1
     // },
 
-    // {
-    //   field: 'action',
-    //   headerName: 'Action',
-    //   flex: 1,
-    //   // eslint-disable-next-line arrow-body-style
-    //   renderCell: (params) => {
-    //     return (
-    //       <>
-    //         <div>
-    //           <IconButton
-    //             aria-label="more"
-    //             id="long-button"
-    //             aria-controls={open ? 'long-menu' : undefined}
-    //             aria-expanded={open ? 'true' : undefined}
-    //             aria-haspopup="true"
-    //             onClick={() => handleClick(params.row._id)}
-    //           >
-    //             <MoreVertIcon />
-    //           </IconButton>
+    {
+      field: 'action',
+      headerName: 'Action',
+      flex: 1,
+      // eslint-disable-next-line arrow-body-style
+      renderCell: (params) => {
+        const handleDelete = async (id) => await deleteApi(`api/lead/deletebadleads`, id);
 
-    //           <StyledMenu
-    //             id="demo-customized-menu"
-    //             MenuListProps={{
-    //               'aria-labelledby': 'demo-customized-button'
-    //             }}
-    //             anchorEl={anchorEl === params.row._id}
-    //             open={open === params.row._id}
-    //             onClose={handleClose}
-    //           >
-    //             <MenuItem onClick={() => handleOpenEditlead(params.row)} disableRipple>
-    //               <EditIcon style={{ marginRight: '8px' }} />
-    //               Edit
-    //             </MenuItem>
-    //             <MenuItem onClick={() => handleOpenCall(params.row._id)} disableRipple>
-    //               <CallIcon style={{ marginRight: '8px' }} />
-    //               Create Call
-    //             </MenuItem>
-    //             <MenuItem onClick={() => handleOpenEmail(params.row._id)} disableRipple>
-    //               <SendIcon style={{ marginRight: '8px' }} />
-    //               Send Email
-    //             </MenuItem>
-    //             <MenuItem onClick={() => handleOpenview(params.row._id)} disableRipple>
-    //               <VisibilityIcon style={{ marginRight: '8px', color: 'green' }} />
-    //               View
-    //             </MenuItem>
-    //             <MenuItem onClick={() => handleOpenDeleteLead(params.row._id)} sx={{ color: 'red' }} disableRipple>
-    //               <DeleteIcon style={{ marginRight: '8px', color: 'red' }} />
-    //               Delete
-    //             </MenuItem>
-    //           </StyledMenu>
-    //         </div>
-    //       </>
-    //     );
-    //   }
-    // }
+        return (
+          <IconButton aria-label="delete" onClick={() => handleDelete(params.row._id)}>
+            <DeleteIcon />
+          </IconButton>
+        );
+      }
+    }
   ];
 
   const handleOpenAdd = () => setOpenAdd(true);

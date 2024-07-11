@@ -12,8 +12,8 @@ import {
   IconPhoneCheck,
   IconPhoneIncoming,
   IconPhoneOutgoing,
-  IconUsers,
-  IconPhoneX
+  IconPhoneX,
+  IconUsers
 } from '@tabler/icons';
 
 // constant
@@ -51,10 +51,80 @@ const dashboard = {
     {
       id: '01',
       title: 'Lead Management',
-      type: 'item',
-      url: '/dashboard/lead',
+      type: 'collapse',
+      url: '#',
       icon: icons.IconAntennaBars5,
-      breadcrumbs: false
+      breadcrumbs: false,
+      children: [
+        {
+          id: '01-01',
+          title: 'Inbound Leads',
+          type: 'item',
+          url: '/dashboard/lead',
+          icon: icons.IconAntennaBars5,
+          breadcrumbs: false
+        },
+        {
+          id: '01-02',
+          title: 'Outbound Leads',
+          type: 'item',
+          url: '/dashboard/outbound-lead',
+          icon: icons.IconAntennaBars5,
+          breadcrumbs: false
+        }
+      ]
+    },
+    {
+      id: '02',
+      title: 'Calls',
+      type: 'collapse',
+      url: '#',
+      icon: icons.IconPhoneIncoming,
+      breadcrumbs: false,
+      children: [
+        {
+          id: '02-01',
+          title: 'Inbound Calls',
+          type: 'item',
+          url: '/dashboard/inbound-calls',
+          icon: icons.IconPhoneIncoming,
+          breadcrumbs: false
+        },
+        {
+          id: '02-02',
+          title: 'Outbound Calls',
+          type: 'item',
+          url: '/dashboard/outbounds',
+          icon: icons.IconPhoneOutgoing,
+          breadcrumbs: false
+        }
+      ]
+    },
+    {
+      id: '03',
+      title: 'Bad leads',
+      type: 'collapse',
+      url: '#',
+      icon: icons.IconPhoneIncoming,
+      breadcrumbs: false,
+      children: [
+        {
+          id: '03-01',
+          title: 'Inbound Bad Leads',
+          type: 'item',
+          url: '/dashboard/no-answer',
+          icon: icons.IconPhoneIncoming,
+          breadcrumbs: false
+        },
+        {
+          id: '03-02',
+          title: 'Outbound Bad Leads',
+          type: 'item',
+          url: '/dashboard/no-answer',
+          icon: icons.IconPhoneOutgoing,
+          breadcrumbs: false
+        }
+      ]
     },
     {
       id: '02',
@@ -135,38 +205,6 @@ const dashboard = {
       type: 'item',
       url: '/dashboard/documents',
       icon: icons.IconFileInvoice,
-      breadcrumbs: false
-    },
-    {
-      id: '12',
-      title: 'Inbound Calls',
-      type: 'item',
-      url: '/dashboard/inbound-calls',
-      icon: icons.IconPhoneIncoming,
-      breadcrumbs: false
-    },
-    {
-      id: '13',
-      title: 'Outbound Calls',
-      type: 'item',
-      url: '/dashboard/outbounds',
-      icon: icons.IconPhoneOutgoing,
-      breadcrumbs: false
-    },
-    {
-      id: '14',
-      title: 'Outbound Leads',
-      type: 'item',
-      url: '/dashboard/outbound-lead',
-      icon: icons.IconAntennaBars5,
-      breadcrumbs: false
-    },
-    {
-      id: '15',
-      title: 'No Answer',
-      type: 'item',
-      url: '/dashboard/no-answer',
-      icon: icons.IconPhoneX,
       breadcrumbs: false
     }
   ]

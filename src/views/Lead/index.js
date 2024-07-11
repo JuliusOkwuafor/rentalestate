@@ -1,28 +1,27 @@
-import { useNavigate } from 'react-router-dom';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import EditIcon from '@mui/icons-material/Edit';
-import Iconify from '../../ui-component/iconify';
-import TableStyle from '../../ui-component/TableStyle';
-import { useState } from 'react';
-import { Stack, Button, Container, Typography, Box, Card } from '@mui/material';
 import CallIcon from '@mui/icons-material/Call';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteIcon from '@mui/icons-material/Delete';
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import SendIcon from '@mui/icons-material/Send';
+import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import SendIcon from '@mui/icons-material/Send';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { Box, Button, Card, Container, Stack, Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { getApi } from 'views/services/api';
-import IconButton from '@mui/material/IconButton';
-import { useEffect } from 'react';
-import AddLead from './AddLead.js';
-import DeleteLead from './UploadCsvLead';
-import EditLead from './EditLead';
-import SendMailDialog from './Components/LeadActivityDialogs/sendMailDialog';
-import CallDialog from './Components/LeadActivityDialogs/CallDialog';
+import { alpha, styled } from '@mui/material/styles';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import moment from 'moment';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getApi } from 'views/services/api';
+import TableStyle from '../../ui-component/TableStyle';
+import Iconify from '../../ui-component/iconify';
+import AddLead from './AddLead.js';
+import CallDialog from './Components/LeadActivityDialogs/CallDialog';
+import SendMailDialog from './Components/LeadActivityDialogs/sendMailDialog';
+import EditLead from './EditLead';
+import DeleteLead from './UploadCsvLead';
 
 // ----------------------------------------------------------------------
 
@@ -82,13 +81,12 @@ const Lead = () => {
 
   // function for fetching all the leads data from the db
 
-  
-
   const [callData, setCallData] = useState([]);
   const [filterLead, setFilterLead] = useState([]);
   const fetchCall = async () => {
     try {
-      const res = await getApi('api/llm//llmleadCalls');
+      const res = await getApi('api/llm/llmleadCalls');
+      console.log(res);
       setCallData(res.data.result);
     } catch (err) {
       console.log(err);
@@ -112,11 +110,11 @@ const Lead = () => {
     };
 
     // Replace all keys in each object of the array
-    const newArrayfiltered = filteredCalls.map((obj, index) => replaceAllKeys(obj, keyMap , index));
+    const newArrayfiltered = filteredCalls.map((obj, index) => replaceAllKeys(obj, keyMap, index));
     setFilterLead(newArrayfiltered);
   };
 
-  function replaceAllKeys(obj, keyMap , index) {
+  function replaceAllKeys(obj, keyMap, index) {
     const newObj = {};
     Object.keys(obj).forEach((oldKey) => {
       if (oldKey in keyMap) {
@@ -156,7 +154,7 @@ const Lead = () => {
       cellClassName: 'name-column--cell name-column--cell--capitalize',
       renderCell: (params) => {
         const handleFirstNameClick = () => {
-          navigate(`/dashboard/inbound-calls/view/${params?.row._id ? params?.row._id : params?.row.call_id }`);
+          navigate(`/dashboard/inbound-calls/view/${params?.row._id ? params?.row._id : params?.row.call_id}`);
         };
 
         return <Box onClick={handleFirstNameClick}>{params?.value ? params?.value : 'No Name'}</Box>;
@@ -167,7 +165,6 @@ const Lead = () => {
       headerName: 'Email',
       flex: 1,
       renderCell: (params) => {
-       
         return <Box>{params?.value ? params?.value : 'N/A'}</Box>;
       }
     },
@@ -176,7 +173,6 @@ const Lead = () => {
       headerName: 'Phone Number',
       flex: 1,
       renderCell: (params) => {
-       
         return <Box>{params?.value ? params?.value : 'N/A'}</Box>;
       }
     },
@@ -185,7 +181,7 @@ const Lead = () => {
       headerName: 'Date',
       flex: 1,
       renderCell: (params) => {
-        return <Typography style={{ color: 'black' }}>{moment(params?.row?.start_date).format('h:mm A DD-MM-YYYY')}</Typography>
+        return <Typography style={{ color: 'black' }}>{moment(params?.row?.start_date).format('h:mm A DD-MM-YYYY')}</Typography>;
       }
     }
   ];
@@ -208,7 +204,7 @@ const Lead = () => {
                     rows={newData}
                     columns={columns}
                     checkboxSelection
-                    getRowId={(row) => row?._id ? row?._id : row?.call_id}
+                    getRowId={(row) => (row?._id ? row?._id : row?.call_id)}
                     initialState={{
                       pagination: {
                         paginationModel: { page: 0, pageSize: 10 }
