@@ -25,19 +25,20 @@ function DetailsOutbound() {
   }, []);
 
   const formatCallDuration = (duration) => {
-    duration = Math.round(duration);
-    if (duration < 60) {
-      return `${duration} seconds`;
-    } else if (duration < 3600) {
-      const minutes = Math.floor(duration / 60);
-      const seconds = duration % 60;
-      return `${minutes} minutes ${seconds > 0 ? `${seconds} seconds` : ''}`;
-    } else {
-      const hours = Math.floor(duration / 3600);
-      const minutes = Math.floor((duration % 3600) / 60);
-      const seconds = duration % 60;
-      return `${hours} hours ${minutes > 0 ? `${minutes} minutes` : ''} ${seconds > 0 ? `${seconds} seconds` : ''}`;
-    }
+      return `${duration} minutes`;
+    // duration = Math.round(duration);
+    // if (duration < 60) {
+    //   return `${duration} seconds`;
+    // } else if (duration < 3600) {
+    //   const minutes = Math.floor(duration / 60);
+    //   const seconds = duration % 60;
+    //   return `${minutes} minutes ${seconds > 0 ? `${seconds} seconds` : ''}`;
+    // } else {
+    //   const hours = Math.floor(duration / 3600);
+    //   const minutes = Math.floor((duration % 3600) / 60);
+    //   const seconds = duration % 60;
+    //   return `${hours} hours ${minutes > 0 ? `${minutes} minutes` : ''} ${seconds > 0 ? `${seconds} seconds` : ''}`;
+    // }
   };
   return (
     <Grid item xs={12} md={5}>

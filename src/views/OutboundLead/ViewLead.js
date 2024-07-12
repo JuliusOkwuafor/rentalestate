@@ -67,7 +67,7 @@ const ViewLead = (props) => {
               <Typography variant="p">{data?.lead_quality_score}</Typography>
             </Grid>
           </Grid>
-          <Grid style={{ marginBottom: '15px' }} container rowSpacing={3} columnSpacing={{ xs: 12 }}>
+          {/* <Grid style={{ marginBottom: '15px' }} container rowSpacing={3} columnSpacing={{ xs: 12 }}>
             <Grid item xs={4}>
               <Typography style={{ fontWeight: 'bold' }} variant="p">
                 Appointment Time
@@ -76,7 +76,7 @@ const ViewLead = (props) => {
             <Grid item xs={8}>
               <Typography variant="p">{moment(data?.appointment_time).format('h:mm A DD-MM-YYYY')}</Typography>
             </Grid>
-          </Grid>
+          </Grid> */}
           <Grid style={{ marginBottom: '15px' }} container rowSpacing={3} columnSpacing={{ xs: 12 }}>
             <Grid item xs={4}>
               <Typography style={{ fontWeight: 'bold' }} variant="p">
@@ -109,16 +109,6 @@ const ViewLead = (props) => {
             </Grid>
             <Grid item xs={8}>
               <Typography variant="p">{data?.property_location}</Typography>
-            </Grid>
-          </Grid>
-          <Grid style={{ marginBottom: '15px' }} container rowSpacing={3} columnSpacing={{ xs: 12 }}>
-            <Grid item xs={4}>
-              <Typography style={{ fontWeight: 'bold' }} variant="p">
-                Market Type
-              </Typography>
-            </Grid>
-            <Grid item xs={8}>
-              <Typography variant="p">{data?.property_market_type}</Typography>
             </Grid>
           </Grid>
           <Grid style={{ marginBottom: '15px' }} container rowSpacing={3} columnSpacing={{ xs: 12 }}>
