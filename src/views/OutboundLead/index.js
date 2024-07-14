@@ -88,6 +88,7 @@ const OutboundLead = () => {
   const fetchCall = async () => {
     try {
       const res = await getApi('api/phoneCall/getQualifiedLeads');
+      console.log(res.data.Leads);
       setCallData(res.data.Leads);
     } catch (err) {
       console.log(err);
@@ -108,7 +109,7 @@ const OutboundLead = () => {
     const keyMap = {
       caller_name: 'name',
       caller_email: 'email_address',
-      start_time: 'start_date'
+      created_at: 'created_at'
     };
 
     // Replace all keys in each object of the array
@@ -180,11 +181,17 @@ const OutboundLead = () => {
     //   }
     // },
     {
-      field: 'start_date',
+      field: 'created_at',
       headerName: 'Date',
       flex: 1,
       renderCell: (params) => {
-        return <Typography style={{ color: 'black' }}>{moment(params?.row?.start_date).format('h:mm A DD-MM-YYYY')}</Typography>;
+        const returnDate = (date) => {
+          const d = new Date(date);
+          const dformat =
+            [d.getMonth() + 1, d.getDate(), d.getFullYear()].join('/') + ' ' + [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
+          return dformat;
+        };
+        return <Typography style={{ color: 'black' }}>{returnDate(params?.row?.created_at)}</Typography>;
       }
     }
   ];

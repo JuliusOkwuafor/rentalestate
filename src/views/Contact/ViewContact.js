@@ -13,7 +13,14 @@ import Palette from '../../ui-component/ThemePalette';
 const ViewContact = (props) => {
   const { open, handleClose, data } = props;
 
-  // console.log({ data });
+  const returnDate = (date) => {
+    const d = new Date(date);
+    const dformat =
+      [d.getMonth() + 1, d.getDate(), d.getFullYear()].join('/') + ' ' + [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
+    return dformat;
+  };
+
+  console.log({ data });
 
   return (
     <Dialog open={open} fullWidth onClose={handleClose} aria-labelledby="scroll-dialog-title" aria-describedby="scroll-dialog-description">
@@ -55,6 +62,36 @@ const ViewContact = (props) => {
             </Grid>
             <Grid item xs={8}>
               <Typography variant="p">{data?.phoneNumber}</Typography>
+            </Grid>
+          </Grid>
+          <Grid style={{ marginBottom: '15px' }} container rowSpacing={3} columnSpacing={{ xs: 12 }}>
+            <Grid item xs={4}>
+              <Typography style={{ fontWeight: 'bold' }} variant="p">
+                Call Duration
+              </Typography>
+            </Grid>
+            <Grid item xs={8}>
+              <Typography variant="p">{parseFloat(data?.call_duration).toFixed(2)}</Typography>
+            </Grid>
+          </Grid>
+          <Grid style={{ marginBottom: '15px' }} container rowSpacing={3} columnSpacing={{ xs: 12 }}>
+            <Grid item xs={4}>
+              <Typography style={{ fontWeight: 'bold' }} variant="p">
+                Call Summary
+              </Typography>
+            </Grid>
+            <Grid item xs={8}>
+              <Typography variant="p">{data?.call_summary}</Typography>
+            </Grid>
+          </Grid>
+          <Grid style={{ marginBottom: '15px' }} container rowSpacing={3} columnSpacing={{ xs: 12 }}>
+            <Grid item xs={4}>
+              <Typography style={{ fontWeight: 'bold' }} variant="p">
+                Call Date
+              </Typography>
+            </Grid>
+            <Grid item xs={8}>
+              <Typography variant="p">{returnDate(data?.created_at)}</Typography>
             </Grid>
           </Grid>
         </DialogContentText>

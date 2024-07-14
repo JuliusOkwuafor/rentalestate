@@ -6,9 +6,9 @@ import moment from 'moment';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 import { deleteApi, getApi } from 'views/services/api';
 import TableStyle from '../../ui-component/TableStyle';
-import { toast } from 'react-toastify';
 // ----------------------------------------------------------------------
 
 //-------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ const NoAnswer = () => {
       caller_name: 'name',
       caller_email: 'email',
       caller_phone: 'phoneNumber',
-      created_at: 'createdAt'
+      created_at: 'created_at'
     };
 
     // Replace all keys in each object of the array
@@ -102,13 +102,14 @@ const NoAnswer = () => {
       headerName: 'Date',
       flex: 1,
       renderCell: (params) => {
-        // const returnDate = (date) => {
-        //   const d = new Date(date);
-        //   const dformat =
-        //     [d.getMonth() + 1, d.getDate(), d.getFullYear()].join('/') + ' ' + [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
-        //   return dformat;
-        // };
-        return <Typography style={{ color: 'black' }}>{moment(params?.row?.created_at).format('h:mm A DD-MM-YYYY')}</Typography>;
+        const returnDate = (date) => {
+          console.log(date);
+          const d = new Date(date);
+          const dformat =
+            [d.getMonth() + 1, d.getDate(), d.getFullYear()].join('/') + ' ' + [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
+          return dformat;
+        };
+        return <Typography style={{ color: 'black' }}>{returnDate(params?.row?.created_at)}</Typography>;
       }
     },
 
