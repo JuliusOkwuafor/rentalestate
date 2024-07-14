@@ -1,11 +1,14 @@
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Card, Container, Stack, Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import moment from 'moment';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { getApi } from 'views/services/api';
+import { useNavigate } from 'react-router';
+import { deleteApi, getApi } from 'views/services/api';
 import TableStyle from '../../ui-component/TableStyle';
-import ViewCall from './ViewCall';
+import { toast } from 'react-toastify';
 // ----------------------------------------------------------------------
 
 //-------------------------------------------------------------------------------------------------
@@ -13,33 +16,33 @@ import ViewCall from './ViewCall';
 const NoAnswer = () => {
   // const navigate = useNavigate();
   // const user = JSON.parse(localStorage.getItem('user'));
-  const [openView, setOpenView] = useState(false);
-  const [viewData, setViewData] = useState(null);
+  const navigate = useNavigate();
 
   //-------------------------------------------
   // ----------------------------------------------------------------------
 
   // function for fetching all the leads data from the db
 
-  const [badLeadData, setBadLeadData] = useState([]);
+  const [noAnswerData, setNoAnswerData] = useState([]);
   const [filterLead, setFilterLead] = useState([]);
   const fetchCall = async () => {
     try {
-      const res = await getApi('api/lead/badleads');
-      setBadLeadData(res.data.data.leadsData);
+      const res = await getApi('api/contact/getAllAgentContacts');
+      console.log(res.data.data.contacts);
+      setNoAnswerData(res.data.data.contacts);
     } catch (err) {
       console.log(err);
     }
   };
-  const filterCallsByLeads = (badLeadData) => {
-    const filteredCalls = badLeadData;
+  const filterCallsByLeads = (noAnswerData) => {
+    const filteredCalls = noAnswerData;
 
     // Define key mappings
     const keyMap = {
-      caller_number: 'phoneNumber',
-      caller_duration: 'call_duration',
-      caller_summary: 'call_summary',
-      created_at: 'created_at'
+      caller_name: 'name',
+      caller_email: 'email',
+      caller_phone: 'phoneNumber',
+      created_at: 'createdAt'
     };
 
     // Replace all keys in each object of the array
@@ -63,8 +66,8 @@ const NoAnswer = () => {
     fetchCall();
   }, []);
   useEffect(() => {
-    filterCallsByLeads(badLeadData);
-  }, [badLeadData]);
+    filterCallsByLeads(noAnswerData);
+  }, [noAnswerData]);
 
   //---------------------
   const [newData, setNewData] = useState([]);
@@ -72,55 +75,72 @@ const NoAnswer = () => {
     updateData(filterLead);
   }, [filterLead]);
   const updateData = (filterLead) => {
-    filterLead.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+    // filterLead.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
     setNewData(filterLead);
   };
 
   // Combine the arrays
   const columns = [
     {
+      field: 'name',
+      headerName: 'Name',
+      flex: 1,
+      cellClassName: 'name-column--cell name-column--cell--capitalize'
+    },
+    {
       field: 'phoneNumber',
       headerName: 'Phone Number',
-      flex: 1,
-      cellClassName: 'name-column--cell name-column--cell--capitalize',
-      renderCell: (params) => {
-        const handleFirstNameClick = () => {
-          setViewData(params?.row);
-          setOpenView(true);
-        };
-
-        return <Box onClick={handleFirstNameClick}>{params?.value ? params?.value : 'No Name'}</Box>;
-      }
+      flex: 1
     },
     {
-      field: 'call_duration',
-      headerName: 'Call Duration',
-      flex: 1,
-      renderCell: (params) => {
-        return <Box>{params?.value ? `${params?.value} mins` : 'N/A'}</Box>;
-      }
-    },
-    {
-      field: 'call_summary',
-      headerName: 'Call Summary',
-      flex: 2,
-      renderCell: (params) => {
-        return <Box style={{ textWrap: `wrap` }}>{params?.value ? params?.value : 'N/A'}</Box>;
-      }
+      field: 'email',
+      headerName: 'Email',
+      flex: 1
     },
     {
       field: 'created_at',
       headerName: 'Date',
       flex: 1,
       renderCell: (params) => {
+        // const returnDate = (date) => {
+        //   const d = new Date(date);
+        //   const dformat =
+        //     [d.getMonth() + 1, d.getDate(), d.getFullYear()].join('/') + ' ' + [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
+        //   return dformat;
+        // };
         return <Typography style={{ color: 'black' }}>{moment(params?.row?.created_at).format('h:mm A DD-MM-YYYY')}</Typography>;
+      }
+    },
+
+    {
+      field: 'action',
+      headerName: 'Action',
+      flex: 1,
+      // eslint-disable-next-line arrow-body-style
+      renderCell: (params) => {
+        const handleDelete = async (id) => {
+          const result = await deleteApi(`api/contact/deleteNoAnswerById?id=`, id);
+          if (result && result.status === 200) {
+            toast.success('file Deleted successful');
+            setTimeout(() => {
+              navigate(0);
+            }, 700);
+          } else if (result && result.response.status === 404) {
+            toast.error('file Not Found');
+          }
+        };
+
+        return (
+          <IconButton aria-label="delete" onClick={() => handleDelete(params.row._id)}>
+            <DeleteIcon />
+          </IconButton>
+        );
       }
     }
   ];
 
   return (
     <>
-      <ViewCall open={openView} data={viewData} handleClose={() => setOpenView(false)} />
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent={'space-between'}>
           <Typography variant="h4">No-Answer</Typography>
@@ -128,10 +148,10 @@ const NoAnswer = () => {
         <TableStyle>
           <Box width="100%">
             <Card style={{ height: '600px', paddingTop: '10px' }}>
-              {badLeadData && (
+              {noAnswerData && (
                 <>
                   <Typography variant="h4" sx={{ margin: '2px 15px' }}>
-                    Not answered calls ( {badLeadData?.length} )
+                    Not answered calls ( {noAnswerData?.length} )
                   </Typography>
                   <DataGrid
                     rows={newData}

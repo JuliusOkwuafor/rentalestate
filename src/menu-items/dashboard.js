@@ -112,7 +112,7 @@ const dashboard = {
           id: '03-01',
           title: 'Inbound Bad Leads',
           type: 'item',
-          url: '/dashboard/contact',
+          url: '/dashboard/inbound-calls',
           icon: icons.IconPhoneIncoming,
           breadcrumbs: false
         },
@@ -166,14 +166,14 @@ const dashboard = {
       icon: icons.IconUsers,
       breadcrumbs: false
     },
-    {
-      id: '07',
-      title: 'Calls',
-      type: 'item',
-      url: '/dashboard/call',
-      icon: icons.IconPhoneCall,
-      breadcrumbs: false
-    },
+    // {
+    //   id: '07',
+    //   title: 'Calls',
+    //   type: 'item',
+    //   url: '/dashboard/call',
+    //   icon: icons.IconPhoneCall,
+    //   breadcrumbs: false
+    // },
     {
       id: '08',
       title: 'Emails',

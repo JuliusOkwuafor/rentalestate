@@ -32,12 +32,13 @@ export const patchApi = async (path, data, id) => {
   }
 };
 
-export const deleteApi = async (path, id) => {
+export const deleteApi = async (path, id, body = {}) => {
   try {
     let result = await axios.delete(constant.baseUrl + path + id, {
       headers: {
         token: localStorage.getItem('token') || sessionStorage.getItem('token')
-      }
+      },
+      data: body
     });
 
     return result;

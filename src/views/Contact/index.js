@@ -1,25 +1,22 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState } from 'react';
-// @mui
 import DeleteIcon from '@mui/icons-material/Delete';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import SendIcon from '@mui/icons-material/Send';
 import { Box, Button, Card, Container, Stack, Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { alpha, styled } from '@mui/material/styles';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 import { deleteApi, getApi } from 'views/services/api';
 import TableStyle from '../../ui-component/TableStyle';
 import Iconify from '../../ui-component/iconify';
 import AddContact from './AddContact';
-
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import SendIcon from '@mui/icons-material/Send';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { alpha, styled } from '@mui/material/styles';
-import * as React from 'react';
-
-import IconButton from '@mui/material/IconButton';
-import { useEffect } from 'react';
 import CallDialog from './Components/contactActivityDialog/CallDialog';
 import SendMailDialog from './Components/contactActivityDialog/sendMailDialog';
 import DeleteContact from './DeleteContact';
@@ -129,8 +126,8 @@ const Contact = () => {
   const fetchContactsData = async () => {
     try {
       // const response = await getApi(user.role === 'admin' ? 'api/contact/viewallcontacts' : `api/contact/viewusercontacts/${user._id}`);
-      const response = await getApi(`api/contact/getAllAgentContacts`);
-      setContactData(response.data.data.contacts);
+      const response = await getApi(`api/lead/badleads`);
+      setContactData(response.data.data.leadsData);
       // user.role === 'admin' ? setContactData(response.data.contactDetails) : setContactData(response.data);
     } catch (error) {
       console.log(error);
@@ -202,8 +199,17 @@ const Contact = () => {
       flex: 1,
       // eslint-disable-next-line arrow-body-style
       renderCell: (params) => {
-        const handleDelete = async (id) => await deleteApi(`api/lead/deletebadleads`, id);
-
+        const handleDelete = async (id) => {
+          const result = await deleteApi(`api/lead/deletebadleadsbyId?id=`, id);
+          if (result && result.status === 200) {
+            toast.success('file Deleted successful');
+            setTimeout(() => {
+              navigate(0);
+            }, 700);
+          } else if (result && result.response.status === 404) {
+            toast.error('file Not Found');
+          }
+        };
         return (
           <IconButton aria-label="delete" onClick={() => handleDelete(params.row._id)}>
             <DeleteIcon />
@@ -226,18 +232,18 @@ const Contact = () => {
       <CallDialog open={openCall} onClose={handleCloseCall} id={contactId} />
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent={'space-between'}>
-          <Typography variant="h4">Contact-Management</Typography>
+          <Typography variant="h4">Outbound-Bad-Leads</Typography>
           <Stack direction="row" alignItems="center" justifyContent={'flex-end'} spacing={2}>
-            <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenAdd}>
+            {/* <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenAdd}>
               New Contact
-            </Button>
+            </Button> */}
           </Stack>
         </Stack>
         <TableStyle>
           <Box width="100%">
             <Card style={{ height: '600px', paddingTop: '15px' }}>
               <Typography variant="h4" sx={{ margin: '2px 15px' }}>
-                Contacts ( {contactData?.length} )
+                Outbound Bad Leads ( {contactData?.length} )
               </Typography>
               <DataGrid
                 rows={contactData}

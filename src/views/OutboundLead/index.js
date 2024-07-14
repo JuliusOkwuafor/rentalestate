@@ -146,7 +146,6 @@ const OutboundLead = () => {
     setNewData(filterLead);
   };
 
-  console.log('newData', newData);
   // Combine the arrays
   const columns = [
     {
