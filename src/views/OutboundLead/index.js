@@ -14,7 +14,8 @@ import moment from 'moment';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getApi } from 'views/services/api';
+import { toast } from 'react-toastify';
+import { deleteApi, getApi } from 'views/services/api';
 import TableStyle from '../../ui-component/TableStyle';
 import Iconify from '../../ui-component/iconify';
 import AddLead from './AddLead.js';
@@ -192,6 +193,31 @@ const OutboundLead = () => {
           return dformat;
         };
         return <Typography style={{ color: 'black' }}>{returnDate(params?.row?.created_at)}</Typography>;
+      }
+    },
+    {
+      field: 'action',
+      headerName: 'Action',
+      flex: 1,
+      // eslint-disable-next-line arrow-body-style
+      renderCell: (params) => {
+        const handleDelete = async (id) => {
+          const result = await deleteApi(`api/phoneCall/deleteQualifiedLeadsById?id=`, id);
+          if (result && result.status === 200) {
+            toast.success('file Deleted successful');
+            setTimeout(() => {
+              navigate(0);
+            }, 700);
+          } else if (result && result.response.status === 404) {
+            toast.error('file Not Found');
+          }
+        };
+
+        return (
+          <IconButton aria-label="delete" onClick={() => handleDelete(params.row._id)}>
+            <DeleteIcon />
+          </IconButton>
+        );
       }
     }
   ];
